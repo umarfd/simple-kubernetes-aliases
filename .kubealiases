@@ -1,0 +1,62 @@
+##############################################
+# KUBERNETES / K3S ALIAS
+##############################################
+
+# kubectl dasar
+alias k="kubectl"
+alias kg="kubectl get"
+alias kd="kubectl describe"
+alias ka="kubectl apply -f"
+alias ke="kubectl edit"
+alias krm="kubectl delete"
+alias kl="kubectl logs"
+alias klo="kubectl logs -f"
+alias kex="kubectl exec -it"
+
+# namespace
+alias kgn="kubectl get ns"
+alias kcn="kubectl config set-context --current --namespace"
+
+# resource umum
+alias kgp="kubectl get pods"
+alias kgd="kubectl get deployments"
+alias kgs="kubectl get svc"
+alias kgi="kubectl get ingress"
+alias kgcm="kubectl get configmap"
+alias kgse="kubectl get secret"
+
+alias kdp="kubectl describe pod"
+alias kdd="kubectl describe deployment"
+alias kds="kubectl describe svc"
+
+# logs & exec
+alias klf="kubectl logs -f"
+alias kexe="kubectl exec -it"
+
+# k3s specific
+alias k3slog="sudo journalctl -u k3s -f"
+alias k3sser="systemctl status k3s"
+alias k3sctl="sudo k3s kubectl"
+
+# debugging
+alias ktop="kubectl top pods"
+alias ktopn="kubectl top nodes"
+alias kpf="kubectl port-forward"
+alias kdesc="kubectl describe"
+
+# yaml apply
+alias kapply="kubectl apply -f"
+alias krestart="kubectl rollout restart"
+alias kundo="kubectl rollout undo"
+
+# fungsi auto pilih pod berdasarkan nama
+kexec() {
+  pod=$(kubectl get pod | grep $1 | awk '{print $1}')
+  kubectl exec -it "$pod" -- /bin/sh
+}
+
+klog() {
+  pod=$(kubectl get pod | grep $1 | awk '{print $1}')
+  kubectl logs -f "$pod"
+}
+##############################################
